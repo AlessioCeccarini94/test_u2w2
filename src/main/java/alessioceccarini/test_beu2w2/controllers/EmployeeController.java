@@ -56,4 +56,9 @@ public class EmployeeController {
 	public void deleteEmployee(@PathVariable UUID employeeId) {
 		this.employeesService.deleteEmployee(employeeId);
 	}
+
+
+	//------------------------------------ P A T C H ----------------------------------------------
+
+	@PatchMapping()
 }
