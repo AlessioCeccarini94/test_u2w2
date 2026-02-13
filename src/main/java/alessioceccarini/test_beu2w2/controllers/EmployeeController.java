@@ -34,6 +34,11 @@ public class EmployeeController {
 		return employeesService.findAllEmployees(page, size, orderBY);
 	}
 
+	@GetMapping("/{employeesId}")
+	public Employee getEmployeeById(@PathVariable UUID employeesId) {
+		return employeesService.findEmloyeeById(employeesId);
+	}
+
 	//------------------------------------ P O S T  ----------------------------------------------
 
 	@PostMapping
@@ -63,12 +68,12 @@ public class EmployeeController {
 	//------------------------------------ P A T C H ----------------------------------------------
 
 	@PatchMapping("/{employeesId}/profileImg")
-	public Employee uploadImg(@RequestParam("profileImg") MultipartFile file, @PathVariable UUID employeesId) {
+	public Employee uploadImg(@RequestParam("profile_img") MultipartFile file, @PathVariable UUID employeesId) {
+		System.out.println(file.getOriginalFilename());
 		try {
 			return employeesService.uploadImage(employeesId, file);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
-
 		}
 	}
 }
