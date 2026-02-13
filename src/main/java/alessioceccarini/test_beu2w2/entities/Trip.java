@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 
@@ -21,12 +22,13 @@ public class Trip {
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
 	private String destination;
-	private String startTime;
+	private LocalDate startDate;
+	@Enumerated(EnumType.STRING)
 	private TripState state;
 
-	public Trip(String destination, String startTime, TripState state) {
+	public Trip(String destination, LocalDate startDate, TripState state) {
 		this.destination = destination;
-		this.startTime = startTime;
+		this.startDate = startDate;
 		this.state = state;
 	}
 }

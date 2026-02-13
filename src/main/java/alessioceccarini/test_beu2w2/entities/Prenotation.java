@@ -28,10 +28,11 @@ public class Prenotation {
 	private Trip trip;
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
-	private Employee employees;
+	private Employee employee;
 
 	public Prenotation(LocalDate requestDate, String request) {
 		this.requestDate = requestDate;
 		this.request = request;
 	}
 }
+
