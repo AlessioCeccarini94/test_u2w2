@@ -11,6 +11,6 @@ public record TripDTo(
 		String destination,
 		@NotNull(message = "insert departure date")
 		LocalDate startDate,
-		@NotBlank(message = "insert trip state")
+		@NotNull(message = "insert state")
 		TripState tripState) {
 }
