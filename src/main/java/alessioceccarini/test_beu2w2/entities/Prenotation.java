@@ -22,17 +22,19 @@ public class Prenotation {
 	@Setter
 	private LocalDate requestDate;
 	@Setter
-	private String request;
+	private String specialRequest;
 	@ManyToOne
 	@JoinColumn(name = "trip_id")
+	@Setter
 	private Trip trip;
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
+	@Setter
 	private Employee employee;
 
-	public Prenotation(LocalDate requestDate, String request) {
+	public Prenotation(LocalDate requestDate, String specialRequest) {
 		this.requestDate = requestDate;
-		this.request = request;
+		this.specialRequest = specialRequest;
 	}
 }
 
