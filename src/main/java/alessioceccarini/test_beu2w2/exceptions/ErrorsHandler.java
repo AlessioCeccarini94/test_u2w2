@@ -27,6 +27,12 @@ public class ErrorsHandler {
 		});
 		return errors;
 	}
+
+	@ExceptionHandler(RuntimeException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public ErrorDTO handleRuntimeException() {
+		return new ErrorDTO("Problemi interni", LocalDate.now());
+	}
 }
 
 
