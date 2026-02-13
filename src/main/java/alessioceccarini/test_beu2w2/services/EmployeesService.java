@@ -77,11 +77,11 @@ public class EmployeesService {
 
 	//------------------------------------ P A T C H ----------------------------------------------
 
-	public String uploadImage(UUID employeeID, MultipartFile file) throws IOException {
+	public Employee uploadImage(UUID employeeID, MultipartFile file) throws IOException {
 		Employee employee = this.findEmloyeeById(employeeID);
 		String profileImgUrl = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
 		employee.setProfileImg(profileImgUrl);
-		return employeesRepo.save(employee).getProfileImg();
+		return employeesRepo.save(employee);
 	}
 }
 

@@ -9,7 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.UUID;
 
 @RestController
@@ -60,5 +62,13 @@ public class EmployeeController {
 
 	//------------------------------------ P A T C H ----------------------------------------------
 
-	@PatchMapping()
+	@PatchMapping("/{employeesId}/profileImg")
+	public Employee uploadImg(@RequestParam("profileImg") MultipartFile file, @PathVariable UUID employeesId) {
+		try {
+			return employeesService.uploadImage(employeesId, file);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+
+		}
+	}
 }
