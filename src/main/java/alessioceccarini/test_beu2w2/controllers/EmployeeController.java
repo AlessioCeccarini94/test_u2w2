@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("employees")
 public class EmployeeController {
@@ -36,5 +38,22 @@ public class EmployeeController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public Employee addEmployee(@RequestBody @Validated EmployeeDTO employeeDTO) {
 		return this.employeesService.saveEmployee(employeeDTO);
+	}
+
+
+	//---------------------------------------- P U T  ----------------------------------------------
+
+	@PutMapping("/{employeeId}")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Employee updateEmployee(@PathVariable UUID employeeId, @RequestBody EmployeeDTO employeeDTO) {
+		return this.employeesService.updateEmployee(employeeId, employeeDTO);
+	}
+
+	//----------------------------------- D E L E T E  ----------------------------------------------
+
+	@DeleteMapping("/{employeeId}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteEmployee(@PathVariable UUID employeeId) {
+		this.employeesService.deleteEmployee(employeeId);
 	}
 }

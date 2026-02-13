@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 
 @RestController
 @RequestMapping("trips")
@@ -38,5 +40,21 @@ public class TripController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public Trip createTrip(@RequestBody @Validated TripDTo tripDTO) {
 		return tripsService.saveTrip(tripDTO);
+	}
+
+	//---------------------------------------- P U T  ----------------------------------------------
+
+	@PutMapping("/{tripId}")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Trip updateTrip(@PathVariable UUID tripId, @RequestBody TripDTo tripDTO) {
+		return tripsService.updateTrip(tripId, tripDTO);
+	}
+
+	//----------------------------------- D E L E T E  ----------------------------------------------
+
+	@DeleteMapping("/{tripId}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteTrip(@PathVariable UUID tripId) {
+		tripsService.deleteTrip(tripId);
 	}
 }

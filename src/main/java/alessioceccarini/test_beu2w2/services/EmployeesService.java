@@ -51,4 +51,21 @@ public class EmployeesService {
 				employeeDTO.email());
 		return this.employeesRepo.save(newEmployee);
 	}
+
+	//---------------------------------------- P U T  ----------------------------------------------
+
+	public Employee updateEmployee(UUID id, EmployeeDTO employeeDTO) {
+		Employee employee = this.findEmloyeeById(id);
+		employee.setUsername(employeeDTO.username());
+		employee.setName(employeeDTO.name());
+		employee.setSurname(employeeDTO.surname());
+		employee.setEmail(employeeDTO.email());
+		return this.employeesRepo.save(employee);
+	}
+
+	//----------------------------------- D E L E T E  ----------------------------------------------
+
+	public void deleteEmployee(UUID id) {
+		this.employeesRepo.deleteById(id);
+	}
 }

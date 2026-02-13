@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class TripsService {
 
@@ -30,10 +32,31 @@ public class TripsService {
 		return tripRepo.findAll(pageable);
 	}
 
+	public Trip findTripById(UUID tripId) {
+		return tripRepo.findById(tripId).orElse(null);
+	}
+
 	//------------------------------------ P O S T ----------------------------------------------
 
 	public Trip saveTrip(TripDTo tripDTo) {
 		Trip newTrip = new Trip(tripDTo.destination(), tripDTo.startDate(), tripDTo.tripState());
 		return tripRepo.save(newTrip);
+	}
+
+	//---------------------------------------- P U T  ----------------------------------------------
+
+	public Trip updateTrip(UUID id, TripDTo tripDTo) {
+		Trip trip = this.findTripById(id);
+		trip.setDestination(tripDTo.destination());
+		trip.setStartDate(tripDTo.startDate());
+		trip.setState(tripDTo.tripState());
+		return tripRepo.save(trip);
+	}
+
+	//----------------------------------- D E L E T E  ----------------------------------------------
+
+	public void deleteTrip(UUID id) {
+		Trip trip = this.findTripById(id);
+		tripRepo.delete(trip);
 	}
 }
